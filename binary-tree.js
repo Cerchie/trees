@@ -107,23 +107,28 @@ findBFS(val){
 
     // let's use BFS for this!
     let queue = [this.root];
+    //using this.root instead of this
     let closest = null;
-
+    //null is less than zed
     while (queue.length) {
+      //same logic pattern as BFS
       let currentNode = queue.shift();
+      //finding the current by shifting
       let currentVal = currentNode.val;
+      //grabbing the currentval
       let higherThanLowerBound = currentVal > lowerBound;
+      //when currentVal is higher than lowerBound it fills this var
       let shouldReassignClosest = currentVal < closest || closest === null;
-
+      //if currentVal is greater than closest, we reassign. Thus currentval is between two prings, <, and >
       if (higherThanLowerBound && shouldReassignClosest) {
-        closest = currentVal;
+        closest = currentVal; //reassigning
       }
 
-      if (currentNode.left) queue.push(currentNode.left);
+      if (currentNode.left) queue.push(currentNode.left); //continuing the process like in BFS
       if (currentNode.right) queue.push(currentNode.right);
     }
 
-    return closest;
+    return closest; //returning the final closest val
   }
 
   /** Further study!
