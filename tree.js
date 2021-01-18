@@ -87,6 +87,27 @@ class Tree {
   /** countEvens(): count all of the nodes in the tree with even values. */
 
   countEvens() {
+    if (!this.root) return 0;
+
+    let total = 0;
+
+    function evenSumHelper(node) {
+      // go through all the children for a Node
+      for (let child of node.children) {
+        // accumulate all values if even
+        if (child.val % 2 == 0)
+        {
+          total += 1;
+        }
+        // if it has any children
+        if (child.children.length > 0) {
+          // recurse with the child as the root
+          evenSumHelper(child);
+        }
+      }
+    }
+    evenSumHelper(this.root);
+    return total;
 
   }
 
@@ -94,7 +115,31 @@ class Tree {
    * whose value is greater than lowerBound. */
 
   numGreater(lowerBound) {
+    if (!this.root) return 0;
 
+    let total = 0;
+
+    if (this.root.val > lowerBound){
+      total += 1;
+    }
+    function sumHelper(node) {
+
+      // go through all the children for a Node
+      for (let child of node.children) {
+
+        // count all values greater than lowerBound
+        if (child.val > lowerBound)
+       {total += 1}
+        // if it has any children
+        if (child.children.length > 0) {
+          // recurse with the child as the root
+          sumHelper(child);
+        }
+      }
+    }
+
+    sumHelper(this.root);
+    return total;
   }
 }
 
